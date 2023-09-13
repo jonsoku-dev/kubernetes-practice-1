@@ -1,0 +1,128 @@
+# React Deployment
+apiVersion: apps/v1  # API 버전
+kind: Deployment  # 리소스 유형
+metadata:
+  name: react-deployment  # 디플로이먼트 이름
+spec:
+  replicas: 3  # Pod 복제본 수
+  selector:
+    matchLabels:
+      component: react  # 이 디플로이먼트가 관리할 Pod 레이블
+  template:  # 새 Pod를 생성할 때 사용할 템플릿
+    metadata:
+      labels:
+        component: react  # Pod 레이블
+    spec:
+      containers:  # 컨테이너 목록
+        - name: react  # 컨테이너 이름
+          image: react-app:latest  # 사용할 이미지
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000  # 컨테이너가 리스닝할 포트
+          resources:
+            limits:
+              cpu: "1"
+              memory: "500Mi"
+            requests:
+              cpu: "0.5"
+              memory: "200Mi"
+---
+# React Service
+apiVersion: v1  # API 버전
+kind: Service  # 리소스 유형
+metadata:
+  name: react-service  # 서비스 이름
+spec:
+  selector:
+    component: react  # 이 서비스가 연결할 Pod 레이블
+  ports:
+    - protocol: TCP  # 프로토콜 유형
+      port: 80  # 서비스가 리스닝할 포트
+      targetPort: 3000  # Pod가 리스닝할 포트
+  type: NodePort  # 서비스 유형
+---
+# Express Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: express
+  template:
+    metadata:
+      labels:
+        component: express
+    spec:
+      containers:
+        - name: express
+          image: express-app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          resources:
+            limits:
+              cpu: "1"
+              memory: "500Mi"
+            requests:
+              cpu: "0.5"
+              memory: "200Mi"
+---
+# Express Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: express-service
+spec:
+  selector:
+    component: express
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: NodePort
+---
+# Nginx Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: nginx
+  template:
+    metadata:
+      labels:
+        component: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx-local:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: "1"
+              memory: "500Mi"
+            requests:
+              cpu: "0.5"
+              memory: "200Mi"
+---
+# Nginx Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    component: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

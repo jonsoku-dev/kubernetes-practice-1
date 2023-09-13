@@ -22,7 +22,7 @@ spec:
           resources:
             limits:
               cpu: "1"
-              memory: "500Mi"
+              memory: "300Mi"
             requests:
               cpu: "0.5"
               memory: "200Mi"
@@ -48,6 +48,7 @@ metadata:
   name: express-deployment
 spec:
   replicas: 3
+  revisionHistoryLimit: 0
   selector:
     matchLabels:
       component: express
@@ -65,7 +66,7 @@ spec:
           resources:
             limits:
               cpu: "1"
-              memory: "500Mi"
+              memory: "300Mi"
             requests:
               cpu: "0.5"
               memory: "200Mi"
@@ -90,7 +91,7 @@ kind: Deployment
 metadata:
   name: nginx-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       component: nginx
@@ -108,7 +109,7 @@ spec:
           resources:
             limits:
               cpu: "1"
-              memory: "500Mi"
+              memory: "300Mi"
             requests:
               cpu: "0.5"
               memory: "200Mi"

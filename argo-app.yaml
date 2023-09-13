@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/jonsoku2/kubernetes-practice-1.git' # 깃허브 레포지토리 URL
-    targetRevision: HEAD
+    targetRevision: main
     path: ./  # app.yaml 파일의 위치
   destination:
     server: 'https://kubernetes.default.svc'

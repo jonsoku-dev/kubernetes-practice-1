@@ -1,0 +1,29 @@
+# Express Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-deployment
+spec:
+  replicas: 3
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      component: express
+  template:
+    metadata:
+      labels:
+        component: express
+    spec:
+      containers:
+        - name: express
+          image: express-app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          resources:
+            limits:
+              cpu: "1"
+              memory: "300Mi"
+            requests:
+              cpu: "0.5"
+              memory: "200Mi"

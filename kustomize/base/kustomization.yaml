@@ -1,0 +1,7 @@
+resources:
+  - react
+  - express
+  - nginx
+  - ingress/nginx-ingress.yaml
+
+# kustomize build base | kubectl apply -f -

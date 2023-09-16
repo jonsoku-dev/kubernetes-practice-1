@@ -1,0 +1,13 @@
+# React Service
+apiVersion: v1  # API 버전
+kind: Service  # 리소스 유형
+metadata:
+  name: react-service  # 서비스 이름
+spec:
+  selector:
+    component: react  # 이 서비스가 연결할 Pod 레이블
+  ports:
+    - protocol: TCP  # 프로토콜 유형
+      port: 80  # 서비스가 리스닝할 포트
+      targetPort: 3000  # Pod가 리스닝할 포트
+  type: NodePort  # 서비스 유형

@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - nginx-deployment.yaml
+  - nginx-service.yaml
+
+commonLabels:
+  app: nginx-proxy
+  env: production
+
+images:
+- name: the2792/nginx-local
+  newTag: new-image-tag

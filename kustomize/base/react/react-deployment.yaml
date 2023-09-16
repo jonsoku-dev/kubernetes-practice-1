@@ -1,0 +1,28 @@
+# React Deployment
+apiVersion: apps/v1  # API 버전
+kind: Deployment  # 리소스 유형
+metadata:
+  name: react-deployment  # 디플로이먼트 이름
+spec:
+  replicas: 3  # Pod 복제본 수
+  selector:
+    matchLabels:
+      component: react  # 이 디플로이먼트가 관리할 Pod 레이블
+  template:  # 새 Pod를 생성할 때 사용할 템플릿
+    metadata:
+      labels:
+        component: react  # Pod 레이블
+    spec:
+      containers:  # 컨테이너 목록
+        - name: react  # 컨테이너 이름
+          image: react-app:latest  # 사용할 이미지
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000  # 컨테이너가 리스닝할 포트
+          resources:
+            limits:
+              cpu: "1"
+              memory: "300Mi"
+            requests:
+              cpu: "0.5"
+              memory: "200Mi"

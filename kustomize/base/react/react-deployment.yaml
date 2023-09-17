@@ -4,7 +4,7 @@ kind: Deployment  # 리소스 유형
 metadata:
   name: react-deployment  # 디플로이먼트 이름
 spec:
-  replicas: 3  # Pod 복제본 수
+  replicas: 1  # Pod 복제본 수
   selector:
     matchLabels:
       component: react  # 이 디플로이먼트가 관리할 Pod 레이블

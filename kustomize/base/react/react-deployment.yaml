@@ -21,8 +21,8 @@ spec:
             - containerPort: 3000  # 컨테이너가 리스닝할 포트
           resources:
             limits:
-              cpu: "1"
-              memory: "300Mi"
+              memory: '128Mi'
+              cpu: '200m'
             requests:
-              cpu: "0.5"
-              memory: "200Mi"
+              memory: '128Mi'
+              cpu: '200m'

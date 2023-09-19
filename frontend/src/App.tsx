@@ -1,8 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 function App() {
+  const { data } = useQuery(["user"], async () => {
+    // using axios
+    const { data } = await axios.get(
+      "/api/users"
+    );
+    return data;
+  });
+
   return (
     <div className="App">
       <header className="App-header">
@@ -19,6 +29,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <p>{JSON.stringify(data, null, 2)}</p>
     </div>
   );
 }

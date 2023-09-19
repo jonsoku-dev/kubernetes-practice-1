@@ -16,7 +16,7 @@ spec:
       containers:  # 컨테이너 목록
         - name: react  # 컨테이너 이름
           image: react-app:latest  # 사용할 이미지
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Never
           ports:
             - containerPort: 3000  # 컨테이너가 리스닝할 포트
           resources:

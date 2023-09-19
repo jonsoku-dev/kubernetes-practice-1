@@ -7,4 +7,4 @@ docker build -t react-app ./frontend
 docker build -t express-app ./backend
 
 # Nginx 이미지 빌드
-docker build -t nginx ./nginx
+docker build -t nginx-app ./nginx
